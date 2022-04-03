@@ -1,12 +1,13 @@
 import { makeAutoObservable } from 'mobx'
+import MusicKit from './MusicKit'
 
 export default class RootStore {
   developerToken: string | null = null
-  musicKit: any
+  musicKit: MusicKit
 
   constructor() {
-    // all stores here
     makeAutoObservable(this)
+    this.musicKit = new MusicKit()
   }
 
   setDeveloperToken = (value: string) => {

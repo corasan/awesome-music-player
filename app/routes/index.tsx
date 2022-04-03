@@ -6,17 +6,13 @@ import setupMusicKit from '~/util/setupMusicKit'
 
 const Index = observer(() => {
   const submit = useSubmit()
-  const { developerToken, setMusicKitInstance, musicKit } = useStore()
+  const { developerToken, musicKit } = useStore()
 
   const reqMusicKit = useCallback(async (token: string) => {
     const kit = await setupMusicKit(token)
-    const res = await kit.authorize()
-    console.log(res)
-    setMusicKitInstance(kit)
-  }, [])
-
-  const authorize = useCallback(async () => {
+    musicKit.setInstance(kit)
     await musicKit.authorize()
+    await musicKit.playlists()
   }, [])
 
   useEffect(() => {
