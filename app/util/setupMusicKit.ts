@@ -1,5 +1,5 @@
 export default function setupMusicKit(developerToken: string) {
-  return new Promise(resolve => {
+  return new Promise<any>(resolve => {
     const musicKitInstance = window.MusicKit.configure({
       developerToken,
       app: {
