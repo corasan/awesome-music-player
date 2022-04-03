@@ -11,12 +11,12 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   return (
-    <html lang="en">
+    <html lang="en" style={{ display: 'flex', flex: 1, height: '100%' }}>
       <head>
         <Meta />
         <Links />
       </head>
-      <body>
+      <body style={{ display: 'flex', flex: 1, height: '100%' }}>
         <NextUIProvider>
           <StoreProvider>
             <Outlet />
