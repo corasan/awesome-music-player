@@ -1,17 +1,19 @@
 import { useEffect } from 'react'
 import { useSubmit } from '@remix-run/react'
-import StoreProvider from '~/stores'
+import { useStore } from '~/stores'
+import { observer } from 'mobx-react-lite'
 
-export default function Index() {
+const Index = observer(() => {
   const submit = useSubmit()
+  const { developerToken } = useStore()
 
   useEffect(() => {
-    submit(null, { method: 'post', action: '/' })
-  }, [submit])
+    if (!developerToken) {
+      submit(null, { method: 'post', action: '/setup' })
+    }
+  }, [developerToken, submit])
 
-  return (
-    <StoreProvider>
-      <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}></div>
-    </StoreProvider>
-  )
-}
+  return <div />
+})
+
+export default Index

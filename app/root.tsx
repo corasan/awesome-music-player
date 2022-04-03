@@ -1,14 +1,7 @@
 import type { MetaFunction } from '@remix-run/node'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
-import getDeveloperToken from '~/util/getDeveloperToken'
-
-export async function action() {
-  const TEAM_ID = process.env.TEAM_ID as string
-  const KEY_ID = process.env.KEY_ID as string
-  const PRIVATE_KEY = process.env.PRIVATE_KEY as string
-  const developerToken = getDeveloperToken(TEAM_ID, KEY_ID, PRIVATE_KEY)
-  return { developerToken }
-}
+import { NextUIProvider } from '@nextui-org/react'
+import StoreProvider from '~/stores'
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -24,7 +17,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <NextUIProvider>
+          <StoreProvider>
+            <Outlet />
+          </StoreProvider>
+        </NextUIProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
