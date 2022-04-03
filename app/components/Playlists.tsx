@@ -1,4 +1,4 @@
-import { Button, Grid, Link } from '@nextui-org/react'
+import { Grid, Link } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 
 const Playlists = ({ data }: { data: MusicKit.Playlist[] }) => {
