@@ -5,12 +5,14 @@ export default class MusicKitStore {
   instance: any = null
   authorizationToken: string | null = null
   playlists: MusicKit.Playlist[] = []
+  authorizationLoading: boolean = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
   async authorize(): Promise<string> {
+    this.setAuthorizationLoading(true)
     const res = await this.instance.authorize()
     this.authorizationToken = res
     return res
@@ -22,11 +24,18 @@ export default class MusicKitStore {
   }
 
   setInstance(value: any) {
-    console.log('setInstance', value)
     this.instance = value
   }
 
   setPlaylists(value: MusicKit.Playlist[]) {
     this.playlists = value
+  }
+
+  setAuthorizationToken(value: string) {
+    this.authorizationToken = value
+  }
+
+  setAuthorizationLoading(value: boolean) {
+    this.authorizationLoading = value
   }
 }
