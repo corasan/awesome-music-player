@@ -1,4 +1,13 @@
+import { useEffect } from 'react'
+import { useSubmit } from '@remix-run/react'
+
 export default function Index() {
+  const submit = useSubmit()
+
+  useEffect(() => {
+    submit(null, { method: 'post', action: '/setup' })
+  }, [submit])
+
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
       <h1>Welcome to Remix</h1>
