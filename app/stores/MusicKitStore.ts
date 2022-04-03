@@ -14,7 +14,8 @@ export default class MusicKitStore {
   async authorize(): Promise<string> {
     this.setAuthorizationLoading(true)
     const res = await this.instance.authorize()
-    this.authorizationToken = res
+    this.setAuthorizationToken(res)
+    this.setAuthorizationLoading(false)
     return res
   }
 
