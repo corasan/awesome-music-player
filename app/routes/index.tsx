@@ -5,7 +5,7 @@ export default function Index() {
   const submit = useSubmit()
 
   useEffect(() => {
-    submit(null, { method: 'post', action: '/setup' })
+    submit(null, { method: 'post', action: '/' })
   }, [submit])
 
   return (
