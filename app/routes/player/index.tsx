@@ -1,6 +1,7 @@
 import { Grid } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
+import Playlists from '~/components/Playlists'
 import { useStore } from '~/stores'
 
 function Player() {
@@ -14,7 +15,11 @@ function Player() {
     loadPlaylists()
   }, [musicKit.instance])
 
-  return <Grid.Container></Grid.Container>
+  return (
+    <Grid.Container>
+      <Playlists />
+    </Grid.Container>
+  )
 }
 
 export default observer(Player)
