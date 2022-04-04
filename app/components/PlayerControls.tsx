@@ -6,7 +6,6 @@ import formatSeconds from '~/util/formatSeconds'
 
 const PlayerControls = () => {
   const { player, musicKit } = useStore()
-  const [currentProgress, setCurrentProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const duration = player.p?.currentPlaybackDuration ?? 0
 
@@ -21,26 +20,35 @@ const PlayerControls = () => {
   }, [musicKit.instance])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (player.p?.nowPlayingItem) {
-        if (currentTime < duration) {
-          setCurrentProgress(prev => prev + 0.105)
-        } else {
-          setCurrentProgress(0)
-          setCurrentTime(0)
-        }
-      }
-    }, 100)
-    return () => clearInterval(interval)
-  }, [player.p?.nowPlayingItem, currentProgress])
+    if (player.p?.nowPlayingItem) {
+      player.startProgress()
+    } else {
+      player.stopProgress()
+    }
+    return () => player.stopProgress()
+  }, [player.p?.nowPlayingItem])
 
   return (
     <Grid.Container direction="row" justify="space-evenly" alignItems="center">
       <Grid xs={2} justify="center">
-        <Text>{currentTime === 0 ? '-:--' : formatSeconds(currentTime)}</Text>
+        {!player.p?.nowPlayingItem ? (
+          <Text>-:--</Text>
+        ) : (
+          <Text>{formatSeconds(player.playbackTime)}</Text>
+        )}
       </Grid>
       <Grid xs={8}>
-        <Progress value={currentProgress} color="gradient" size="xs" min={0} max={duration} />
+        {!player.p?.nowPlayingItem ? (
+          <Progress value={0} color="gradient" size="xs" min={0} max={100} />
+        ) : (
+          <Progress
+            value={player.playbackProgress}
+            color="gradient"
+            size="xs"
+            min={0}
+            max={duration}
+          />
+        )}
       </Grid>
       <Grid xs={2} justify="center">
         <Text>{duration ? formatSeconds(duration) : '-:--'}</Text>
