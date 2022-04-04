@@ -1,4 +1,4 @@
-import { Button, Grid, Link } from '@nextui-org/react'
+import { Button, Grid } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '~/stores'
 
