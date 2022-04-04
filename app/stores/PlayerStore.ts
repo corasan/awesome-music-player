@@ -7,9 +7,10 @@ export default class PlayerStore {
   musicKit: MusicKitStore
   nowPlaying: MusicKit.MediaItem | null = null
   playerInstance: MusicKit.Player | null = null
-  playbackTime: number
+  playbackTime: number = 0
   playbackProgress: number = 0
   progressInterval: ReturnType<typeof setInterval>
+  timeInterval: ReturnType<typeof setInterval>
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
@@ -27,7 +28,7 @@ export default class PlayerStore {
 
   startProgress = () => {
     this.progressInterval = setInterval(
-      () => this.setPlaybackProgress(this.playbackProgress + 0.105),
+      () => this.setPlaybackProgress(this.playbackProgress + 0.102),
       100,
     )
   }
@@ -37,11 +38,35 @@ export default class PlayerStore {
     clearInterval(this.progressInterval)
   }
 
+  startTime = () => {
+    this.timeInterval = setInterval(() => {
+      this.setPlaybackTime(this.playbackTime + 1)
+    }, 1000)
+  }
+
+  stopTime = () => {
+    this.setPlaybackProgress(0)
+    clearInterval(this.progressInterval)
+  }
+
+  reset = () => {
+    console.log('here')
+    this.stopTime()
+    this.stopProgress()
+    this.setPlaybackProgress(0)
+    this.setPlaybackTime(0)
+  }
+
+  get playbackDuration() {
+    return this.nowPlaying?.playbackDuration ?? 0
+  }
+
   get p() {
     return this.musicKit.instance?.player
   }
 
-  setNowPlaying(value: MusicKit.MediaItem) {
+  setNowPlaying = (value: MusicKit.MediaItem) => {
+    console.log(value)
     this.nowPlaying = value
   }
 }
