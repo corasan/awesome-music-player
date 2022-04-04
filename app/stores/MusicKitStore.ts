@@ -33,7 +33,7 @@ export default class MusicKitStore {
     await this.instance?.setQueue({
       playlist,
     })
-    this.instance?.play()
+    await this.instance?.play()
     const current = this.instance?.player.nowPlayingItem
     if (current) {
       this.rootStore.player.setNowPlaying(current)
