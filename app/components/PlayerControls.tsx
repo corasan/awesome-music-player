@@ -8,12 +8,14 @@ const PlayerControls = () => {
   const { player } = useStore()
 
   useEffect(() => {
-    if (player.nowPlaying) {
+    if (player.nowPlaying?.isPlayable) {
       player.startProgress()
       player.startTime()
+    } else {
+      player.reset()
     }
 
-    return () => player.stopIntervals()
+    return () => player.reset()
   }, [player.nowPlaying])
 
   useEffect(() => {

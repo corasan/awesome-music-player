@@ -45,19 +45,13 @@ export default class PlayerStore {
   }
 
   stopTime = () => {
-    this.setPlaybackProgress(0)
-    clearInterval(this.progressInterval)
+    this.setPlaybackTime(0)
+    clearInterval(this.timeInterval)
   }
 
   reset = () => {
-    this.setPlaybackProgress(0)
-    this.setPlaybackTime(0)
-  }
-
-  stopIntervals = () => {
     this.stopTime()
     this.stopProgress()
-    this.reset()
   }
 
   get playbackDuration() {
