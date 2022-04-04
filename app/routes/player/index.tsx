@@ -19,7 +19,9 @@ function Player() {
   return (
     <Grid.Container>
       <Playlists />
-      <PlayerControls />
+      <Grid xs={10}>
+        <PlayerControls />
+      </Grid>
     </Grid.Container>
   )
 }

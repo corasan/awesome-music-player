@@ -16,14 +16,17 @@ export default class PlayerStore {
 
   async getPlayerInstance() {
     const res = this.musicKit.instance?.player ?? null
-    this.setPlayerInstance(res)
+  }
+
+  get p() {
+    return this.musicKit.instance?.player
+  }
+
+  get playbackProgress() {
+    return this.p?.currentPlaybackProgress ?? 0
   }
 
   setNowPlaying(value: MusicKit.MediaItem) {
     this.nowPlaying = value
-  }
-
-  setPlayerInstance(value: MusicKit.Player | null) {
-    this.playerInstance = value
   }
 }
