@@ -10,6 +10,7 @@ type musicKitConfig = {
 
 declare global {
   interface Window {
+    musicInstance: any
     MusicKit: any
     ENV: {
       TEAM_ID: string
