@@ -6,6 +6,7 @@ export default class MusicKitStore {
   authorizationToken: string | null = null
   playlists: MusicKit.Playlist[] = []
   authorizationLoading: boolean = false
+  currentlyPlaying: string | null = null
 
   constructor() {
     makeAutoObservable(this)
@@ -20,8 +21,18 @@ export default class MusicKitStore {
   }
 
   async loadPlaylists() {
+    console.log(this.instance)
     const res = await this.instance?.api.library.playlists(null)
     this.setPlaylists(res)
+  }
+
+  async playPlaylist(playlist: string) {
+    await this.instance.setQueue({
+      playlist,
+    })
+    await this.instance.play()
+    const current = await this.instance.player.nowPlayingItem
+    this.setCurrentlyPlaying(current)
   }
 
   setInstance(value: any) {
@@ -38,5 +49,13 @@ export default class MusicKitStore {
 
   setAuthorizationLoading(value: boolean) {
     this.authorizationLoading = value
+  }
+
+  setCurrentlyPlaying(value: string) {
+    this.currentlyPlaying = value
+  }
+
+  get music() {
+    return window.MusicKit.getInstance()
   }
 }
