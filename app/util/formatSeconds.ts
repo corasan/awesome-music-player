@@ -1,8 +1,9 @@
 export default function formatSeconds(time: number) {
-  var hr = ~~(time / 3600)
-  var min = ~~((time % 3600) / 60)
-  var sec = time % 60
-  var sec_min = ''
+  const t = Number(time.toFixed(0))
+  const hr = ~~(t / 3600)
+  const min = ~~((t % 3600) / 60)
+  const sec = t % 60
+  let sec_min = ''
   if (hr > 0) {
     sec_min += '' + hr + ':' + (min < 10 ? '0' : '')
   }
