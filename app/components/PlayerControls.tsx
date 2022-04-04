@@ -1,4 +1,4 @@
-import { Container, Progress } from '@nextui-org/react'
+import { Progress, Grid, Text } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -23,12 +23,17 @@ const PlayerControls = (props: any) => {
   }, [musicKit.instance])
 
   return (
-    <>
-      <Progress value={currentProgress * 100} color="gradient" />
-      <p>Time: {currentTime === 0 ? '-:--' : formatSeconds(currentTime)}</p>
-      <p> progress: {currentProgress}</p>
-      <p>Duration: {duration ? formatSeconds(duration) : '-:--'}</p>
-    </>
+    <Grid.Container direction="row" justify="space-evenly" alignItems="center">
+      <Grid xs={2} justify="center">
+        <Text>{currentTime === 0 ? '-:--' : formatSeconds(currentTime)}</Text>
+      </Grid>
+      <Grid xs={8}>
+        <Progress value={currentProgress * 100} color="gradient" size="xs" />
+      </Grid>
+      <Grid xs={2} justify="center">
+        <Text>{duration ? formatSeconds(duration) : '-:--'}</Text>
+      </Grid>
+    </Grid.Container>
   )
 }
 

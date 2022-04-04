@@ -20,7 +20,12 @@ function Player() {
     <Grid.Container>
       <Playlists />
       <Grid xs={10}>
-        <PlayerControls />
+        <Grid.Container>
+          <Grid xs={10} css={{ height: '90%' }}></Grid>
+          <Grid xs={10}>
+            <PlayerControls />
+          </Grid>
+        </Grid.Container>
       </Grid>
     </Grid.Container>
   )
