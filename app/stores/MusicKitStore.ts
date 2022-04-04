@@ -11,7 +11,7 @@ export default class MusicKitStore {
     makeAutoObservable(this)
   }
 
-  async authorize(): Promise<string> {
+  async authorize() {
     this.setAuthorizationLoading(true)
     const res = await this.instance.authorize()
     this.setAuthorizationToken(res)
