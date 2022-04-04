@@ -6,7 +6,6 @@ import formatSeconds from '~/util/formatSeconds'
 
 const PlayerControls = () => {
   const { player } = useStore()
-  const duration = player.playbackDuration / 1000
 
   useEffect(() => {
     if (player.nowPlaying) {
@@ -14,12 +13,14 @@ const PlayerControls = () => {
       player.startTime()
     }
 
-    if (player.playbackTime >= player.playbackDuration) {
+    return () => player.stopIntervals()
+  }, [player.nowPlaying])
+
+  useEffect(() => {
+    if (player.playbackProgress >= player.playbackDuration) {
       player.reset()
     }
-
-    return () => player.reset()
-  }, [player.nowPlaying])
+  }, [player.playbackProgress])
 
   return (
     <Grid.Container direction="row" justify="space-evenly" alignItems="center">
@@ -35,12 +36,14 @@ const PlayerControls = () => {
             color="gradient"
             size="xs"
             min={0}
-            max={duration}
+            max={player.playbackDuration}
           />
         )}
       </Grid>
       <Grid xs={2} justify="center">
-        <Text>{duration !== 0 ? formatSeconds(duration) : '-:--'}</Text>
+        <Text>
+          {player.playbackDuration !== 0 ? formatSeconds(player.playbackDuration) : '-:--'}
+        </Text>
       </Grid>
     </Grid.Container>
   )
