@@ -1,20 +1,18 @@
 import { Grid } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { useStore } from '~/stores'
 
 function Player() {
   const { musicKit } = useStore()
 
-  const loadPlaylists = useCallback(async () => {
+  const loadPlaylists = async () => {
     await musicKit.loadPlaylists()
-  }, [])
-
-  console.log(musicKit.playlists)
+  }
 
   useEffect(() => {
     loadPlaylists()
-  }, [])
+  }, [musicKit.instance])
 
   return <Grid.Container></Grid.Container>
 }
