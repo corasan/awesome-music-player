@@ -1241,6 +1241,11 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
+"@types/musickit-js@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/musickit-js/-/musickit-js-1.0.2.tgz#8d93da8673572b67a5553b326c49f673c0872a74"
+  integrity sha512-nlAiwJspdThC0bdGlU7mxdzntxl+EGJmwY3vYYzvdZmeV3SDnFfqwKzp2W49uTOKPf9T75m68u72+4pJ07V7XQ==
+
 "@types/node-fetch@^2.5.12", "@types/node-fetch@^2.5.7":
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.1.tgz#8f127c50481db65886800ef496f20bbf15518975"

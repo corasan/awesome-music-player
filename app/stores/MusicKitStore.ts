@@ -4,9 +4,9 @@ import RootStore from './RootStore'
 export default class MusicKitStore {
   rootStore: RootStore
   developerToken: string | null = null
-  instance: any = null
+  instance: MusicKit.MusicKitInstance | null = null
   authorizationToken: string | null = null
-  playlists: MusicKit.Playlist[] = []
+  playlists: MusicKit.Resource[] = []
   authorizationLoading: boolean = false
   currentlyPlaying: string | null = null
 
@@ -17,32 +17,34 @@ export default class MusicKitStore {
 
   async authorize() {
     this.setAuthorizationLoading(true)
-    const res = await this.instance.authorize()
-    this.setAuthorizationToken(res)
-    this.setAuthorizationLoading(false)
-    return res
+    const res = await this.instance?.authorize()
+    if (res) {
+      this.setAuthorizationToken(res)
+      this.setAuthorizationLoading(false)
+    }
   }
 
   async loadPlaylists() {
-    console.log(this.instance)
     const res = await this.instance?.api.library.playlists(null)
-    this.setPlaylists(res)
+    this.setPlaylists(res ?? [])
   }
 
   async playPlaylist(playlist: string) {
-    await this.instance.setQueue({
+    await this.instance?.setQueue({
       playlist,
     })
-    await this.instance.play()
-    const current = await this.instance.player.nowPlayingItem
-    this.rootStore.player.setNowPlaying(current)
+    this.instance?.play()
+    const current = this.instance?.player.nowPlayingItem
+    if (current) {
+      this.rootStore.player.setNowPlaying(current)
+    }
   }
 
   setInstance(value: any) {
     this.instance = value
   }
 
-  setPlaylists(value: MusicKit.Playlist[]) {
+  setPlaylists(value: MusicKit.Resource[]) {
     this.playlists = value
   }
 

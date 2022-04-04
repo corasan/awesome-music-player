@@ -1,6 +1,7 @@
 import { Grid } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
+import PlayerControls from '~/components/PlayerControls'
 import Playlists from '~/components/Playlists'
 import { useStore } from '~/stores'
 
@@ -18,6 +19,7 @@ function Player() {
   return (
     <Grid.Container>
       <Playlists />
+      <PlayerControls />
     </Grid.Container>
   )
 }

@@ -4,7 +4,7 @@ declare namespace Player {
     currentPlaybackProgress: number
     currentBufferedProgress: number
     currentPlaybackTimeRemaining: number
-    nowPlaying: NowPlaying
+    nowPlayingItem: NowPlaying
   }
 }
 
@@ -13,4 +13,8 @@ interface NowPlaying {
   albumName: string
   artworkURL: string
   title: string
+}
+
+interface Player {
+  nowPlayingItem: NowPlaying
 }
