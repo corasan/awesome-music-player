@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx'
+import RootStore from './RootStore'
 
 export default class MusicKitStore {
+  rootStore: RootStore
   developerToken: string | null = null
   instance: any = null
   authorizationToken: string | null = null
@@ -8,8 +10,9 @@ export default class MusicKitStore {
   authorizationLoading: boolean = false
   currentlyPlaying: string | null = null
 
-  constructor() {
+  constructor(rootStore: RootStore) {
     makeAutoObservable(this)
+    this.rootStore = rootStore
   }
 
   async authorize() {
@@ -32,7 +35,7 @@ export default class MusicKitStore {
     })
     await this.instance.play()
     const current = await this.instance.player.nowPlayingItem
-    this.setCurrentlyPlaying(current)
+    this.rootStore.player.setCurrentlyPlaying(current)
   }
 
   setInstance(value: any) {
@@ -49,13 +52,5 @@ export default class MusicKitStore {
 
   setAuthorizationLoading(value: boolean) {
     this.authorizationLoading = value
-  }
-
-  setCurrentlyPlaying(value: string) {
-    this.currentlyPlaying = value
-  }
-
-  get music() {
-    return window.MusicKit.getInstance()
   }
 }
