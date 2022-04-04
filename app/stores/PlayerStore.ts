@@ -28,7 +28,7 @@ export default class PlayerStore {
 
   startProgress = () => {
     this.progressInterval = setInterval(
-      () => this.setPlaybackProgress(this.playbackProgress + 0.102),
+      () => this.setPlaybackProgress(this.playbackProgress + 0.1),
       100,
     )
   }
@@ -50,15 +50,21 @@ export default class PlayerStore {
   }
 
   reset = () => {
-    console.log('here')
-    this.stopTime()
-    this.stopProgress()
     this.setPlaybackProgress(0)
     this.setPlaybackTime(0)
   }
 
+  stopIntervals = () => {
+    this.stopTime()
+    this.stopProgress()
+    this.reset()
+  }
+
   get playbackDuration() {
-    return this.nowPlaying?.playbackDuration ?? 0
+    if (this.nowPlaying?.playbackDuration) {
+      return Number(this.nowPlaying?.playbackDuration.toFixed()) / 1000
+    }
+    return 0
   }
 
   get p() {
