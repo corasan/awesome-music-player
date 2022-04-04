@@ -35,7 +35,7 @@ export default class MusicKitStore {
     })
     await this.instance.play()
     const current = await this.instance.player.nowPlayingItem
-    this.rootStore.player.setCurrentlyPlaying(current)
+    this.rootStore.player.setNowPlaying(current)
   }
 
   setInstance(value: any) {
