@@ -6,7 +6,7 @@ export default class MusicKitStore {
   developerToken: string | null = null
   instance: MusicKit.MusicKitInstance | null = null
   authorizationToken: string | null = null
-  playlists: MusicKit.Resource[] = []
+  playlists: Resource[] = []
   authorizationLoading: boolean = false
   currentlyPlaying: string | null = null
 
@@ -25,7 +25,7 @@ export default class MusicKitStore {
   }
 
   async loadPlaylists() {
-    const res = await this.instance?.api.library.playlists(null)
+    const res = (await this.instance?.api.library.playlists(null)) as Resource[]
     this.setPlaylists(res ?? [])
   }
 
@@ -44,7 +44,7 @@ export default class MusicKitStore {
     this.instance = value
   }
 
-  setPlaylists(value: MusicKit.Resource[]) {
+  setPlaylists(value: Resource[]) {
     this.playlists = value
   }
 
@@ -56,3 +56,5 @@ export default class MusicKitStore {
     this.authorizationLoading = value
   }
 }
+
+type Resource = MusicKit.Resource & { id: string }

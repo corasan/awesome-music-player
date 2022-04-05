@@ -1,8 +1,8 @@
 import { Grid, Container, Row } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
-import PlayerControls from '~/components/PlayerControls'
-import Playlists from '~/components/Playlists'
+import PlayerControls from '~/components/Player/PlayerControls'
+import Playlists from '~/components/Player/Playlists'
 import { useStore } from '~/stores'
 
 function Player() {
@@ -30,9 +30,6 @@ function Player() {
           >
             <PlayerControls />
           </Grid>
-          {/* <Row align="center" css={{ border: '2px solid purple', p: 0 }}>
-            <PlayerControls />
-          </Row> */}
         </Container>
       </Grid>
     </Grid.Container>

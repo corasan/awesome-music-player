@@ -13,7 +13,7 @@ const Playlists = () => {
   )
 }
 
-const PlaylistItem = ({ item }: { item: MusicKit.Playlist }) => {
+const PlaylistItem = ({ item }: PlaylistItemProps) => {
   const { musicKit } = useStore()
 
   return (
@@ -21,6 +21,10 @@ const PlaylistItem = ({ item }: { item: MusicKit.Playlist }) => {
       {item.attributes.name}
     </Button>
   )
+}
+
+type PlaylistItemProps = {
+  item: MusicKit.Resource & { id: string }
 }
 
 export default observer(Playlists)
