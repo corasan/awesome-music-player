@@ -24,7 +24,7 @@ export const loader = async () => {
   const TEAM_ID = process.env.TEAM_ID as string
   const KEY_ID = process.env.KEY_ID as string
   const PRIVATE_KEY = process.env.PRIVATE_KEY as string
-  const developerToken = getDeveloperToken(TEAM_ID, KEY_ID, PRIVATE_KEY)
+  const developerToken = getDeveloperToken(TEAM_ID, KEY_ID, PRIVATE_KEY.replace(/\\n/gm, '\n'))
 
   return { developerToken }
 }
