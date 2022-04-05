@@ -23,6 +23,7 @@ function Player() {
         <Container css={{ border: '2px solid blue', p: 0 }} direction="column">
           <Grid lg css={{ height: '92%', border: '2px solid red' }}></Grid>
           <Grid
+            lg
             justify="center"
             alignItems="center"
             css={{ border: '2px solid purple', pt: 20, pb: 20, backgroundColor: '#afafaf' }}
