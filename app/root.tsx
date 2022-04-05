@@ -16,7 +16,7 @@ import { observer } from 'mobx-react-lite'
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
-  title: 'New Remix App',
+  title: 'Awesome Music Player',
   viewport: 'width=device-width,initial-scale=1',
 })
 
@@ -37,8 +37,8 @@ const App = observer(() => {
     const instance = MusicKit.configure({
       developerToken: data.developerToken,
       app: {
-        name: 'My Cool Web App',
-        build: '1978.4.1',
+        name: 'Awesome Music Player',
+        build: '1.0.0',
       },
     })
     musicKit.setInstance(instance)
