@@ -1,7 +1,8 @@
-import { Grid, Container, Row } from '@nextui-org/react'
+import { Grid } from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import PlayerControls from '~/components/Player/PlayerControls'
+import PlayerMedia from '~/components/Player/PlayerMedia'
 import Playlists from '~/components/Player/Playlists'
 import { useStore } from '~/stores'
 
@@ -18,19 +19,20 @@ function Player() {
 
   return (
     <Grid.Container>
-      <Playlists />
-      <Grid lg>
-        <Container css={{ border: '2px solid blue', p: 0 }} direction="column">
-          <Grid lg css={{ height: '92%', border: '2px solid red' }}></Grid>
-          <Grid
-            lg
-            justify="center"
-            alignItems="center"
-            css={{ border: '2px solid purple', pt: 20, pb: 20, backgroundColor: '#afafaf' }}
-          >
-            <PlayerControls />
-          </Grid>
-        </Container>
+      <Grid
+        xs={2}
+        css={{ borderRight: '1px solid #cfcfcf3f', overflow: 'auto' }}
+        direction="column"
+      >
+        <Playlists />
+      </Grid>
+      <Grid lg direction="column">
+        <Grid lg>
+          <PlayerMedia />
+        </Grid>
+        <Grid css={{ pt: 30, pb: 50 }}>
+          <PlayerControls />
+        </Grid>
       </Grid>
     </Grid.Container>
   )
