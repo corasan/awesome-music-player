@@ -8,11 +8,20 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { NextUIProvider } from '@nextui-org/react'
+import { NextUIProvider, createTheme } from '@nextui-org/react'
 import StoreProvider, { useStore } from '~/stores'
 import getDeveloperToken from './util/getDeveloperToken'
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
+import useDarkMode from 'use-dark-mode'
+
+const lightTheme = createTheme({
+  type: 'light',
+})
+
+const darkTheme = createTheme({
+  type: 'dark',
+})
 
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
@@ -31,6 +40,7 @@ export const loader = async () => {
 
 const App = observer(() => {
   const data = useLoaderData()
+  const darkMode = useDarkMode(false)
   const { musicKit } = useStore()
 
   const setup = async () => {
@@ -50,7 +60,11 @@ const App = observer(() => {
     }
   }, [data, musicKit.instance])
 
-  return <Outlet />
+  return (
+    <NextUIProvider theme={darkMode.value ? darkTheme : lightTheme}>
+      <Outlet />
+    </NextUIProvider>
+  )
 })
 
 export default function Root() {
@@ -62,11 +76,9 @@ export default function Root() {
         <script src="https://js-cdn.music.apple.com/musickit/v1/musickit.js" />
       </head>
       <body style={{ display: 'flex', flex: 1, height: '100%' }}>
-        <NextUIProvider>
-          <StoreProvider>
-            <App />
-          </StoreProvider>
-        </NextUIProvider>
+        <StoreProvider>
+          <App />
+        </StoreProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
