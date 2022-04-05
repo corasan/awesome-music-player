@@ -5,31 +5,28 @@ import { useStore } from '~/stores'
 import formatSeconds from '~/util/formatSeconds'
 
 const PlayerControls = () => {
-  const { player } = useStore()
+  const { player, musicKit } = useStore()
 
   useEffect(() => {
-    if (player.nowPlaying?.isPlayable) {
+    if (player.nowPlaying && player.nowPlaying.isPreparedToPlay) {
       player.startProgress()
       player.startTime()
-    } else {
-      player.reset()
     }
 
-    return () => player.reset()
+    return () => player.resetIntervals()
   }, [player.nowPlaying])
 
   useEffect(() => {
-    if (player.playbackProgress >= player.playbackDuration) {
-      player.reset()
-    }
-  }, [player.playbackProgress])
+    player.mediaDidChangeListener()
+    player.mediaWillChangeListener()
+  }, [musicKit.instance])
 
   return (
     <Grid.Container direction="row" justify="space-evenly" alignItems="center">
       <Grid xs={2} justify="center">
         {!player.nowPlaying ? <Text>-:--</Text> : <Text>{formatSeconds(player.playbackTime)}</Text>}
       </Grid>
-      <Grid xs={8}>
+      <Grid lg>
         {!player.nowPlaying ? (
           <Progress value={0} color="gradient" size="xs" min={0} max={100} />
         ) : (
