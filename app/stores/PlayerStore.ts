@@ -59,11 +59,19 @@ export default class PlayerStore {
     this.stopProgress()
   }
 
+  timeDidChangeListener = () => {
+    this.musicKit.instance?.addEventListener('playbackTimeDidChange', () => {
+      this.setPlaybackTime(this.playbackTime + 0.25)
+    })
+  }
+
   mediaDidChangeListener = () => {
     this.musicKit.instance?.addEventListener('mediaItemDidChange', () => {
       const media = this.musicKit.instance?.player.nowPlayingItem
       if (media) {
-        this.setNowPlaying(this.musicKit.instance?.player.nowPlayingItem as MusicKit.MediaItem)
+        setTimeout(() => {
+          this.setNowPlaying(this.musicKit.instance?.player.nowPlayingItem as MusicKit.MediaItem)
+        }, 100)
       }
     })
   }

@@ -10,7 +10,6 @@ const PlayerControls = () => {
   useEffect(() => {
     if (player.nowPlaying && player.nowPlaying.isPreparedToPlay) {
       player.startProgress()
-      player.startTime()
     }
 
     return () => player.resetIntervals()
@@ -19,6 +18,7 @@ const PlayerControls = () => {
   useEffect(() => {
     player.mediaDidChangeListener()
     player.mediaWillChangeListener()
+    player.timeDidChangeListener()
   }, [musicKit.instance])
 
   return (
