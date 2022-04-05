@@ -49,13 +49,34 @@ export default class PlayerStore {
     clearInterval(this.timeInterval)
   }
 
-  reset = () => {
+  resetValues = () => {
+    this.setPlaybackProgress(0)
+    this.setPlaybackTime(0)
+  }
+
+  resetIntervals = () => {
     this.stopTime()
     this.stopProgress()
   }
 
+  mediaDidChangeListener = () => {
+    this.musicKit.instance?.addEventListener('mediaItemDidChange', () => {
+      const media = this.musicKit.instance?.player.nowPlayingItem
+      if (media) {
+        this.setNowPlaying(this.musicKit.instance?.player.nowPlayingItem as MusicKit.MediaItem)
+      }
+    })
+  }
+
+  mediaWillChangeListener = () => {
+    this.musicKit.instance?.addEventListener('mediaItemWillChange', () => {
+      this.resetIntervals()
+      this.resetValues()
+    })
+  }
+
   get playbackDuration() {
-    if (this.nowPlaying?.playbackDuration) {
+    if (this.nowPlaying) {
       return Number(this.nowPlaying?.playbackDuration.toFixed()) / 1000
     }
     return 0
