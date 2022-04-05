@@ -34,7 +34,7 @@ const App = observer(() => {
   const { musicKit } = useStore()
 
   const setup = async () => {
-    const instance = await window.MusicKit.configure({
+    const instance = MusicKit.configure({
       developerToken: data.developerToken,
       app: {
         name: 'My Cool Web App',
@@ -49,12 +49,6 @@ const App = observer(() => {
       setup()
     }
   }, [data, musicKit.instance])
-
-  useEffect(() => {
-    if (musicKit.instance) {
-      musicKit.authorize()
-    }
-  }, [musicKit.instance])
 
   return <Outlet />
 })
