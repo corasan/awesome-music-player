@@ -8,17 +8,10 @@ const PlayerControls = () => {
   const { player, musicKit } = useStore()
 
   useEffect(() => {
-    if (player.nowPlaying && player.nowPlaying.isPreparedToPlay) {
-      player.startProgress()
-    }
-
-    return () => player.resetIntervals()
-  }, [player.nowPlaying])
-
-  useEffect(() => {
     player.mediaDidChangeListener()
     player.mediaWillChangeListener()
     player.timeDidChangeListener()
+    player.playbackStateDidChangeListener()
   }, [musicKit.instance])
 
   return (
