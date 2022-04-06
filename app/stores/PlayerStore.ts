@@ -116,6 +116,16 @@ export default class PlayerStore {
     })
   }
 
+  removeListeners = () => {
+    this.musicKit.instance?.removeEventListener('playbackTimeDidChange', this.timeDidChangeListener)
+    this.musicKit.instance?.removeEventListener('mediaItemDidChange', this.mediaDidChangeListener)
+    this.musicKit.instance?.removeEventListener('mediaItemWillChange', this.mediaWillChangeListener)
+    this.musicKit.instance?.removeEventListener(
+      'playbackStateDidChange',
+      this.playbackStateDidChangeListener,
+    )
+  }
+
   get playbackDuration() {
     if (this.nowPlaying) {
       return Number(this.nowPlaying?.playbackDuration.toFixed()) / 1000
