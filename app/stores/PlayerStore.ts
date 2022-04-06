@@ -63,6 +63,11 @@ export default class PlayerStore {
     this.stopProgress()
   }
 
+  resetAll = () => {
+    this.resetValues()
+    this.resetIntervals()
+  }
+
   timeDidChangeListener = () => {
     this.musicKit.instance?.addEventListener('playbackTimeDidChange', () => {
       this.setPlaybackTime(this.playbackTime + 0.25)
@@ -73,9 +78,7 @@ export default class PlayerStore {
     this.musicKit.instance?.addEventListener('mediaItemDidChange', () => {
       const media = this.musicKit.instance?.player.nowPlayingItem
       if (media) {
-        setTimeout(() => {
-          this.setNowPlaying(this.musicKit.instance?.player.nowPlayingItem as MusicKit.MediaItem)
-        }, 100)
+        this.setNowPlaying(this.musicKit.instance?.player.nowPlayingItem as MusicKit.MediaItem)
       }
     })
   }
@@ -87,10 +90,8 @@ export default class PlayerStore {
     })
   }
 
-  // playbackStateDidChange
   playbackStateDidChangeListener = () => {
     this.musicKit.instance?.addEventListener('playbackStateDidChange', ({ oldState, state }) => {
-      // PlaybackState {
       //   0 - NONE,
       //   1 - LOADING,
       //   2 - PLAYING,
@@ -101,16 +102,15 @@ export default class PlayerStore {
       //   7 - waiting,
       //   8 = stalled,
       //   9 - completed,
-      // }
-      console.log(typeof state)
       switch (state) {
         case 2:
-          console.log('progress started', state)
           this.startProgress()
           break
         case 3:
-          console.log('progress stopped', state)
           this.pauseProgress()
+          break
+        case 5:
+          this.resetAll()
           break
       }
     })
@@ -123,16 +123,11 @@ export default class PlayerStore {
     return 0
   }
 
-  get p() {
-    return this.musicKit.instance?.player
-  }
-
   get isPlaying() {
     return this.musicKit.instance?.player.isPlaying
   }
 
-  setNowPlaying = (value: MusicKit.MediaItem) => {
-    console.log(value)
+  setNowPlaying = (value: MusicKit.MediaItem | null) => {
     this.nowPlaying = value
   }
 }

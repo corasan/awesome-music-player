@@ -6,18 +6,20 @@ import formatSeconds from '~/util/formatSeconds'
 
 const PlayerControls = () => {
   const { player, musicKit } = useStore()
+  const opacity = player.nowPlaying ? 1 : 0.1
 
   useEffect(() => {
-    player.mediaDidChangeListener()
-    player.mediaWillChangeListener()
-    player.timeDidChangeListener()
-    player.playbackStateDidChangeListener()
+    if (musicKit.instance) {
+      player.mediaDidChangeListener()
+      player.timeDidChangeListener()
+      player.playbackStateDidChangeListener()
+    }
   }, [musicKit.instance])
 
   return (
-    <Grid.Container direction="row" justify="space-evenly" alignItems="center">
+    <Grid.Container direction="row" justify="space-evenly" alignItems="center" css={{ opacity }}>
       <Grid xs={2} justify="center">
-        {!player.nowPlaying ? <Text>-:--</Text> : <Text>{formatSeconds(player.playbackTime)}</Text>}
+        <Text>{!player.nowPlaying ? '--:--' : formatSeconds(player.playbackTime)}</Text>
       </Grid>
       <Grid lg>
         {!player.nowPlaying ? (
@@ -29,12 +31,13 @@ const PlayerControls = () => {
             size="xs"
             min={0}
             max={player.playbackDuration}
+            shadow
           />
         )}
       </Grid>
       <Grid xs={2} justify="center">
         <Text>
-          {player.playbackDuration !== 0 ? formatSeconds(player.playbackDuration) : '-:--'}
+          {player.playbackDuration !== 0 ? formatSeconds(player.playbackDuration) : '--:--'}
         </Text>
       </Grid>
     </Grid.Container>

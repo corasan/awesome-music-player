@@ -20,7 +20,7 @@ const Index = () => {
       <Grid.Container justify="center" css={{ pt: 100 }}>
         <Grid xs={2} justify="center">
           <Button color="error" size="lg" onClick={() => musicKit.authorize()}>
-            {musicKit.authorizationLoading ? <Loading color="error" size="lg" /> : 'Authorize'}
+            {musicKit.authorizationLoading ? <Loading color="white" size="lg" /> : 'Authorize'}
           </Button>
         </Grid>
       </Grid.Container>
