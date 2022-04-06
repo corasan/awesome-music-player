@@ -21,6 +21,12 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   type: 'dark',
+  theme: {
+    colors: {
+      background: '#1a171b',
+      controlBlur: '#fff',
+    },
+  },
 })
 
 export const meta: MetaFunction = () => ({

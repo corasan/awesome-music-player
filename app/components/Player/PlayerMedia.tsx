@@ -20,7 +20,7 @@ const PlayerMedia = () => {
           <Text h2 css={{ mt: 30 }}>
             {playing?.title}
           </Text>
-          <Text h4 css={{ mt: 10 }} color="#4f4f4f7f">
+          <Text h4 css={{ mt: 10 }} color="$gray400">
             {playing.artistName}
           </Text>
         </>

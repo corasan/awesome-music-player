@@ -21,7 +21,10 @@ function Player() {
     <Grid.Container>
       <Grid
         xs={2}
-        css={{ borderRight: '1px solid #cfcfcf3f', overflow: 'auto' }}
+        css={{
+          borderRight: '1px solid #cfcfcf3f',
+          overflow: 'auto',
+        }}
         direction="column"
       >
         <Playlists />
