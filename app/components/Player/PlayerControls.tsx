@@ -14,6 +14,8 @@ const PlayerControls = () => {
       player.timeDidChangeListener()
       player.playbackStateDidChangeListener()
     }
+
+    return () => player.removeListeners()
   }, [musicKit.instance])
 
   return (
