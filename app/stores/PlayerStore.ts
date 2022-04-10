@@ -11,6 +11,7 @@ export default class PlayerStore {
   playbackProgress: number = 0
   progressInterval: ReturnType<typeof setInterval>
   timeInterval: ReturnType<typeof setInterval>
+  isPlaying: boolean = false
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
@@ -104,9 +105,11 @@ export default class PlayerStore {
       //   9 - completed,
       switch (state) {
         case 2:
+          this.setIsPlaying(true)
           this.startProgress()
           break
         case 3:
+          this.setIsPlaying(false)
           this.pauseProgress()
           break
         case 5:
@@ -133,11 +136,11 @@ export default class PlayerStore {
     return 0
   }
 
-  get isPlaying() {
-    return this.musicKit.instance?.player.isPlaying
-  }
-
   setNowPlaying = (value: MusicKit.MediaItem | null) => {
     this.nowPlaying = value
+  }
+
+  setIsPlaying = (value: boolean) => {
+    this.isPlaying = value
   }
 }
