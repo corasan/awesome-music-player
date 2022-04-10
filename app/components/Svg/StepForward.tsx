@@ -1,6 +1,6 @@
 import Icon, { IconProps } from './Icon'
 
-export default function StepBackward({ color = '#000', width = 40, height = 40 }: IconProps) {
+export default function StepForward({ color = '#000', width = 40, height = 40 }: IconProps) {
   return (
     <>
       <Icon width={width} height={height}>
