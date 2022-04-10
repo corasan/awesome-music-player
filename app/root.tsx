@@ -67,7 +67,7 @@ const App = observer(() => {
   }, [data, musicKit.instance])
 
   return (
-    <NextUIProvider theme={darkMode.value ? darkTheme : lightTheme}>
+    <NextUIProvider theme={!darkMode.value ? darkTheme : lightTheme}>
       <Outlet />
     </NextUIProvider>
   )
