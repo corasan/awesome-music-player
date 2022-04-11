@@ -21,12 +21,37 @@ const PlayerControls = () => {
     return () => player.removeListeners()
   }, [musicKit.instance])
 
+  const play = async () => {
+    if (player.isPlaying) {
+      musicKit.instance?.pause()
+    } else {
+      const res = await musicKit.instance?.play()
+      console.log(res)
+    }
+  }
+
+  const next = async () => {
+    await musicKit.instance?.skipToNextItem()
+  }
+
+  const previous = async () => {
+    await musicKit.instance?.skipToPreviousItem()
+  }
+
+  const cursor = player.nowPlaying ? 'pointer' : 'default'
+
   return (
     <Container direction="column" justify="space-evenly" alignItems="center" css={{ opacity }}>
-      <Row align="center">
-        <Step />
-        {!player.isPlaying ? <Pause /> : <Play />}
-        <Step style={{ transform: 'rotate(180deg)' }} />
+      <Row align="center" justify="center">
+        <span onClick={() => previous()} style={{ cursor, marginRight: 20 }}>
+          <Step />
+        </span>
+        <span onClick={() => play()} style={{ cursor }}>
+          {player.isPlaying ? <Pause /> : <Play />}
+        </span>
+        <span onClick={() => next()} style={{ cursor, marginLeft: 20 }}>
+          <Step style={{ transform: 'rotate(180deg)' }} />
+        </span>
       </Row>
       <Row align="center">
         <Col span={2} css={{ justifyContent: 'center', display: 'flex' }}>
