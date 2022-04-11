@@ -112,7 +112,7 @@ export default class PlayerStore {
           this.setIsPlaying(false)
           this.pauseProgress()
           break
-        case 5:
+        default:
           this.resetAll()
           break
       }
