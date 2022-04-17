@@ -15,7 +15,13 @@ const Index = () => {
   }, [musicKit.instance, musicKit.authorizationToken, musicKit.authorizationLoading])
 
   return (
-    <Container display="flex" justify="center" alignItems="center" direction="column">
+    <Container
+      display="flex"
+      justify="center"
+      alignItems="center"
+      direction="column"
+      css={{ height: '100vh' }}
+    >
       <img src="/images/apple-music.png" alt="Apple Music Logo" height={100} />
       <Grid.Container justify="center" css={{ pt: 100 }}>
         <Grid xs={2} justify="center">

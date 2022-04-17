@@ -75,13 +75,13 @@ const App = observer(() => {
 
 export default function Root() {
   return (
-    <html lang="en" style={{ display: 'flex', flex: 1, height: '100%' }}>
+    <html lang="en" style={{ height: '100vh', width: '100vw' }}>
       <head>
         <Meta />
         <Links />
         <script src="https://js-cdn.music.apple.com/musickit/v1/musickit.js" />
       </head>
-      <body style={{ display: 'flex', flex: 1, height: '100%' }}>
+      <body style={{ height: '100vh', width: '100vw' }}>
         <StoreProvider>
           <App />
         </StoreProvider>
