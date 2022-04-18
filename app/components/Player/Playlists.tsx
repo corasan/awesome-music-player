@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+import { Link } from '@remix-run/react'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '~/stores'
 
@@ -14,13 +14,7 @@ const Playlists = () => {
 }
 
 const PlaylistItem = ({ item }: PlaylistItemProps) => {
-  const { musicKit } = useStore()
-
-  return (
-    <Button light color="primary" onClick={() => musicKit.playPlaylist(item.id)}>
-      {item.attributes.name}
-    </Button>
-  )
+  return <Link to={item.id}>{item.attributes.name}</Link>
 }
 
 type PlaylistItemProps = {
