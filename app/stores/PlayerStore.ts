@@ -11,7 +11,9 @@ export default class PlayerStore {
   playbackProgress: number = 0
   progressInterval: ReturnType<typeof setInterval>
   timeInterval: ReturnType<typeof setInterval>
-  isPlaying: boolean = false
+  isPlaying = false
+  showCurrentPlaylist = true
+  currentPlaylist: MusicKit.Resource | null = null
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this)
@@ -142,5 +144,13 @@ export default class PlayerStore {
 
   setIsPlaying = (value: boolean) => {
     this.isPlaying = value
+  }
+
+  setCurrentPlaylist = (value: MusicKit.Resource) => {
+    this.currentPlaylist = value
+  }
+
+  setShowCurrentPlaylist = (value: boolean) => {
+    this.showCurrentPlaylist = value
   }
 }
